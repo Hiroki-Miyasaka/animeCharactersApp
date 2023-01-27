@@ -10,20 +10,20 @@ const User = sequelize.define('users', {
         autoIncrement: true
     },
     username: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     email: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     password: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 });
 User.hasMany(CharacterInfo, {foreignKey: "id"})
-CharacterInfo.belongsToMany(User)
+CharacterInfo.belongsTo(User)
 
 sequelize.sync().then(() => {
     console.log('User table created successfully');

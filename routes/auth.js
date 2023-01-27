@@ -6,10 +6,10 @@ import User from "../models/user.model.js";
 const router = express.Router();
 
 // show character info
-router.get('/index', (req, res) => {
+router.get('/index/:id', (req, res) => {
     CharacterInfo.findAll().then((characters) => {
         console.log(characters);
-        res.render('pages/index', {characters: characters, message: req.query.message, title: "Characters Infomation"});
+        res.render('pages/index/:id', {characters: characters, message: req.query.message, title: "Characters Infomation"});
     }).catch((err) => {
         console.log(err);
     })

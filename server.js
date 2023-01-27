@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
+import userRouter from './routes/user.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get('/health', (req, res) => {
     })
 })
 
+app.use('/', userRouter);
 app.use('/', authRouter);
 
 app.listen(3001, () => {

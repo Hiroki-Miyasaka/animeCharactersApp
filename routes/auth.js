@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/index/:id', (req, res) => {
     CharacterInfo.findAll().then((characters) => {
         console.log(characters);
-        res.render('pages/index/:id', {characters: characters, message: req.query.message, title: "Characters Infomation"});
+        res.render('/index/:id', {user: user, characters: characters, message: req.query.message, title: "Characters Infomation"});
     }).catch((err) => {
         console.log(err);
     })

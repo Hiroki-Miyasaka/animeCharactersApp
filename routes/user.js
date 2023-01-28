@@ -1,5 +1,7 @@
 import express from 'express';
 import User from '../models/user.model.js';
+import CharacterInfo from '../models/character.model.js';
+
 
 const router = express.Router();
 
@@ -25,9 +27,19 @@ router.post('/login', (req, res) => {
     }).then((user) => {
         // user is data from mysql database
         // when user is not found
-        console.log(user);
         if(!user) res.render("pages/login", { message: "Invalid email or password", title: "Login" });
-        res.render("pages/index/:id", { user: user, character: character, title: "Your Page", message: ''});
+        //found user id in character database
+        CharacterInfo.findOne({
+            where: {
+                id: user.id
+            }
+        }).then((character) => {
+            if(!character) res.render('index/' + user.id, { user: user, character: '', title: '', message: '' });
+            // res.redirect('index/:id/?user=user&character=""&title=""&message=This is your page');
+            res.render('index/:id', {user: user, character: character, title: 'Your page', message: ''});
+        }).catch((err) => {
+            console.log(err);
+        })
     }).catch((err) => {
         console.log(err);
     })

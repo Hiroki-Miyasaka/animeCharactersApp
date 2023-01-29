@@ -1,5 +1,6 @@
 import sequelize from './sequelize.js';
 import { DataTypes } from 'sequelize';
+import User from './user.model.js';
 
 
 const CharacterInfo = sequelize.define('characters', {
@@ -19,6 +20,8 @@ const CharacterInfo = sequelize.define('characters', {
     }
 });
 
+
+CharacterInfo.belongsTo(User, { foreignKey: { allowNull: false } });
 
 sequelize.sync().then(() => {
     console.log("Character table created successfully");

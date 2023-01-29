@@ -5,6 +5,7 @@ import CharacterInfo from '../models/character.model.js';
 
 const router = express.Router();
 
+
 router.get('/home', (req, res) => {
     res.render('pages/login', {title: 'Home Page', message: ''});
 })
@@ -16,6 +17,12 @@ router.get("/login", (req, res) => {
 router.get("/register", (req, res) => {
     res.render("pages/register", { title: "Register"})
 })
+
+// router.get("/character", (req, res) => {
+//     // console.log('user.id 24 in auth.js' ,req.params.id);
+//     res.render("pages/character", { title: "character"})
+// })
+
 
 router.post('/login', (req, res) => {
     // SELECT * from users WHERE email = req.body.email AND password = req.body.password
@@ -29,21 +36,22 @@ router.post('/login', (req, res) => {
         // when user is not found
         if(!user) res.render("pages/login", { message: "Invalid email or password", title: "Login" });
         //found user id in character database
-        CharacterInfo.findOne({
-            where: {
-                id: user.id
-            }
-        }).then((character) => {
-            if(!character) res.render('index/' + user.id, { user: user, character: '', title: '', message: '' });
-            // res.redirect('index/:id/?user=user&character=""&title=""&message=This is your page');
-            res.render('index/:id', {user: user, character: character, title: 'Your page', message: ''});
-        }).catch((err) => {
-            console.log(err);
-        })
+        console.log('user.id 39 in user.js' ,user.id);
+       let userId = user.id;
+       req.session.userId = userId;
+       console.log('user.id 42 in user.js' ,req.session.userId);
+       console.log('user.id 43 in user.js' ,user.username);
+       let username = user.username;
+       req.session.username = username;
+       console.log('user.id 45 in user.js' ,req.session.username);
+       res.redirect("/character");
     }).catch((err) => {
         console.log(err);
     })
 });
+
+
+
 
 router.post('/register', (req, res) =>  {
     // SELECT * from users WHERE email = req.body.email

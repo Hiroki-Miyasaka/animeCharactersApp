@@ -1,6 +1,6 @@
 import sequelize from './sequelize.js';
 import { DataTypes } from 'sequelize';
-import CharacterInfo from "./character.model.js";
+// import CharacterInfo from "./character.model.js";
 
 const User = sequelize.define('users', {
     id: {
@@ -22,8 +22,8 @@ const User = sequelize.define('users', {
         allowNull: false
     }
 });
-User.hasMany(CharacterInfo, {foreignKey: "id"})
-CharacterInfo.belongsTo(User)
+
+
 
 sequelize.sync().then(() => {
     console.log('User table created successfully');

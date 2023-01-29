@@ -1,8 +1,7 @@
 <%- include('../partials/header') %> 
 
-<body>
     <h1>characters</h1>
-    <p>Hello <%= user.username %> </p>
+    <p>Hello <%= username %> </p>
     
     <% for(let index = 0; index < characters.length; index++) {%>
         <img src="<%= characters[index].characterImage %>" alt="" width="200" height="200">
@@ -10,5 +9,3 @@
     <% } %> 
 
     <%= message %>
-</body>
-</html>

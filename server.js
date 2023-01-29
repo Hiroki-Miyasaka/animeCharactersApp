@@ -3,12 +3,20 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
 import userRouter from './routes/user.js';
+import session from "express-session";
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
+app.use(
+    session({
+        secret: 'characterKey',
+        resave: false,
+        saveUninitialized: true
+    })
+)
 
 app.set('view engine', 'ejs');
 

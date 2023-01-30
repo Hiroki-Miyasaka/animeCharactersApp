@@ -21,12 +21,6 @@ router.get("/register", (req, res) => {
     res.render("pages/register", { title: "Register"})
 })
 
-// router.get("/character", (req, res) => {
-//     // console.log('user.id 24 in auth.js' ,req.params.id);
-//     res.render("pages/character", { title: "character"})
-// })
-
-
 router.post('/login', (req, res) => {
     // SELECT * from users WHERE email = req.body.email AND password = req.body.password
     User.findOne({
@@ -39,14 +33,14 @@ router.post('/login', (req, res) => {
         // when user is not found
         if(!user) res.render("pages/login", { message: "Invalid email or password", title: "Login" });
         //found user id in character database
-        console.log('user.id 39 in user.js' ,user.id);
+        console.log('user.id 36 in user.js' ,user.id);
        let userId = user.id;
        req.session.userId = userId;
-       console.log('user.id 42 in user.js' ,req.session.userId);
-       console.log('user.id 43 in user.js' ,user.username);
+       console.log('user.id 39 in user.js' ,req.session.userId);
+       console.log('user.id 40 in user.js' ,user.username);
        let username = user.username;
        req.session.username = username;
-       console.log('user.id 45 in user.js' ,req.session.username);
+       console.log('user.id 43 in user.js' ,req.session.username);
        res.redirect("/character");
     }).catch((err) => {
         console.log(err);

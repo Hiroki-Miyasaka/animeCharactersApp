@@ -14,12 +14,12 @@ router.get('/character', (req, res) => {
     // console.log('user.id 10 in auth.js' ,req.params.id);
     userIdSession = req.session.userId;
     usernameSession = req.session.username;
-    console.log('username 15 in auth.js' ,req.session.username);
+    console.log('username 17 in auth.js' ,req.session.username);
     if(!userIdSession && !usernameSession){
         console.log("Couldn't found userIdSession and usernameSession in character.ejs");
         res.redirect('/login');
     }
-    console.log('user.id 16 in auth.js' ,userIdSession);
+    console.log('user.id 22 in auth.js' ,userIdSession);
     CharacterInfo.findAll({
         where: {
             userId: userIdSession
@@ -40,10 +40,7 @@ router.get('/new', (req, res) => {
         console.log("Couldn't found userIdSession in new.ejs");
         res.redirect('/login');
     }
-    // if(!usernameSession){
-    //     console.log("Couldn't found usernameSession in new.ejs");
-    //     res.redirect('/login');
-    // }
+    
     res.render('pages/new', {userId: req.session.userId, title: "Add Information"});
 });
 
@@ -69,7 +66,7 @@ router.post('/new', (req, res) => {
                 characterImage: req.body.characterImage,
                 userId: userIdSession
             }).then((character) => {
-                console.log('username 72 in auth.js' ,character);
+                console.log('username 69 in auth.js' ,character);
                 if(character) res.render('pages/new', {message: 'Add character successfull', title: 'Add Information'});
             }).catch((err) => {
                 console.log(err);
@@ -81,8 +78,22 @@ router.post('/new', (req, res) => {
 });
 
 // delete character info
-router.post('/index/:id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
+    userIdSession = req.session.userId;
+    if(!userIdSession){
+        res.redirect('/login');
+    }
 
+    CharacterInfo.destroy({
+        where: {
+            id: req.params.id,
+            userId: userIdSession
+        }
+    }).then(() => {
+        res.redirect('/character');
+    }).catch((err) => {
+        console.log(err);
+    })
 });
 
 // modify character info

@@ -90,4 +90,11 @@ router.post('/edit/:id', (req, res) => {
 
 });
 
+// logout
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+
+    res.redirect('/home');
+});
+
 export default router;

@@ -1,11 +1,19 @@
 <%- include('../partials/header') %> 
 
-    <h1>characters</h1>
-    <p>Hello <%= username %> </p>
-    
-    <% for(let index = 0; index < characters.length; index++) {%>
-        <img src="<%= characters[index].characterImage %>" alt="" width="200" height="200">
-        <p><%= characters[index].characterName %></p>
-    <% } %> 
+<h1>characters</h1>
+<p>Hello <%= username %> </p>
 
-    <%= message %>
+<% for(let index = 0; index < characters.length; index++) {%>
+    <div class="card" style="width: 18rem;">
+        <img src="<%= characters[index].characterImage %>" class="card-img-top" alt="<%= characters[index].characterName %>">
+        <div class="card-body">
+        <h5 class="card-title"><%= characters[index].characterName %></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+<% } %> 
+
+<%= message %>
+
+    

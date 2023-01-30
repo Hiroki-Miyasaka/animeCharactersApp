@@ -7,6 +7,9 @@ const router = express.Router();
 
 
 router.get('/home', (req, res) => {
+    if(req.session) {
+        res.redirect('/character');
+    }
     res.render('pages/login', {title: 'Home Page', message: ''});
 })
 

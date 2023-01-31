@@ -123,10 +123,10 @@ router.post('/edit/:id', (req, res) => {
     }
     const characterId = req.params.id;
     const modifiedCharacter = {
-        id: characterId,
+        // id: characterId,
         characterName: req.body.characterName,
         characterImage: req.body.characterImage,
-        userId: userIdSession
+        // userId: userIdSession
     };
 
     CharacterInfo.update(modifiedCharacter, {

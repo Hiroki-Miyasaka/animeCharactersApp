@@ -118,6 +118,9 @@ router.get('/edit/:id', (req, res) => {
 // modify character info
 router.post('/edit/:id', (req, res) => {
     userIdSession = req.session.userId;
+    if(!userIdSession){
+        res.redirect('/login');
+    }
     const characterId = req.params.id;
     const modifiedCharacter = {
         id: characterId,

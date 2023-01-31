@@ -1,0 +1,14 @@
+<%- include('../partials/head') %> 
+
+<form action="/edit/<%= character.id %> " method="POST">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Character name</label>
+      <input type="text" name="characterName" value="<%= character.characterName %>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Character name">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Character image</label>
+      <input type="text" name="characterImage" value="<%= character.characterImage %>" class="form-control" id="exampleInputPassword1" placeholder="Character image">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <p><%= title %> </p>
+</form>

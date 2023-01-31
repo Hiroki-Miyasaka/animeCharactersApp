@@ -96,9 +96,45 @@ router.post('/delete/:id', (req, res) => {
     })
 });
 
+// show edit screen
+router.get('/edit/:id', (req, res) => {
+    userIdSession = req.session.userId;
+    if(!userIdSession){
+        res.redirect('/login');
+    }
+    console.log('req.params.id 105 in auth.js' ,req.params.id);
+    CharacterInfo.findOne({
+        where: {
+            id: req.params.id,
+            userId: userIdSession
+        }
+    }).then((character) => {
+        res.render('pages/edit', {character: character, title: 'Edit page'});
+    }).catch((err) => {
+        console.log(err);
+    })
+});
+
 // modify character info
 router.post('/edit/:id', (req, res) => {
+    userIdSession = req.session.userId;
+    const characterId = req.params.id;
+    const modifiedCharacter = {
+        id: characterId,
+        characterName: req.body.characterName,
+        characterImage: req.body.characterImage,
+        userId: userIdSession
+    };
 
+    CharacterInfo.update(modifiedCharacter, {
+        where: {
+            id: characterId
+        }
+    }).then(() => {
+        res.redirect('/character');
+    }).catch((err) => {
+        console.log(err);
+    })
 });
 
 // logout

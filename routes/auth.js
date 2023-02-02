@@ -1,6 +1,6 @@
 import express from 'express';
 import CharacterInfo from '../models/character.model.js';
-import User from "../models/user.model.js";
+
 // import cloudinary from '../cloud/cloudinary.js';
 
 const router = express.Router();

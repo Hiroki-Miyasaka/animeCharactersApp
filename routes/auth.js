@@ -10,7 +10,7 @@ let usernameSession;
 
 // show character info
 router.get('/character', (req, res) => {
-    // console.log('user.id 10 in auth.js' ,req.params.id);
+    
     userIdSession = req.session.userId;
     usernameSession = req.session.username;
     console.log('username 17 in auth.js' ,req.session.username);
